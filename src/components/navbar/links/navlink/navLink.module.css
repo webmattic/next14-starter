@@ -1,0 +1,16 @@
+.container {
+  min-width: 100px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 500;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+}
+
+.active {
+  background-color: var(--text);
+  color: var(--bg);
+}
