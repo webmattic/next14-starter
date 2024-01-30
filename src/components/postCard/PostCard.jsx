@@ -2,7 +2,7 @@ import styles from "./postCard.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-const postCard = ({ post }) => {
+const PostCard = ({ post }) => {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -27,4 +27,4 @@ const postCard = ({ post }) => {
   );
 };
 
-export default postCard;
+export default PostCard;

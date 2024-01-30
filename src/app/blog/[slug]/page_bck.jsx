@@ -4,11 +4,23 @@ import styles from "./singlePost.module.css";
 import Image from "next/image";
 import { getPost } from "../../../lib/data";
 
+// const getData = async (slug) => {
+//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
+//   if (!res.ok) {
+//     throw new Error("Something is drastically wrong");
+//   } else {
+//     return res.json();
+//   }
+// };
+
 const SinglePostPage = async ({ params }) => {
   const { slug } = params;
+
+  // FETCH DATA WITH AN API
+  // const post = await getData(slug);
+
+  // FETCH DATA WITHOUT AN API
   const post = await getPost(slug);
- 
- 
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
