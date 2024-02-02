@@ -19,7 +19,7 @@ export const getPosts = async () => {
 export const getPost = async (slug) => {
   try {
     dbConnect();
-    const post = await Post.find({ slug });
+    const post = await Post.findOne({ slug });
     return post;
   } catch (err) {
     console.log(err);

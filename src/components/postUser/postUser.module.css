@@ -1,4 +1,19 @@
-.container {
+.container{
+  display: flex;
+  align-items:center;
+  gap:20px;
+}
+
+.avatar{
+  object-fit:cover;
+  -webkit-border-radius:50%;
+  -moz-border-radius:50%;
+  -ms-border-radius:50%;
+  -o-border-radius:50%;
+  border-radius:50%;
+}
+
+.texts {
   display: flex;
   flex-direction: column;
   gap: 10px;
