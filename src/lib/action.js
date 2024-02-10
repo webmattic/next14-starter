@@ -4,6 +4,7 @@ import { dbConnect } from "./utils";
 import { Post, User } from "./models";
 import { signIn, signOut } from "./auth";
 import bcrypt from "bcrypt";
+import { error } from "console";
 
 export const addPost = async (formData) => {
   const { title, desc, slug, userId } = Object.fromEntries(formData);
@@ -52,12 +53,15 @@ export const handleLogout = async () => {
 };
 
 // ==== Registration ====
-export const register = async (formData) => {
+// Always check first if the User exists in the Database or not.
+
+export const register = async (previousState, formData) => {
   const { username, email, img, password, passwordRepeat } =
     Object.fromEntries(formData);
 
   if (password !== passwordRepeat) {
-    return "Passwords do not match";
+    // return "Passwords do not match";
+    return { error: "Passwords do not match" };
   }
 
   try {
@@ -66,7 +70,7 @@ export const register = async (formData) => {
     const user = await User.findOne({ username });
 
     if (user) {
-      return "User Exists";
+      return { error: "User name already exists" };
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -81,6 +85,19 @@ export const register = async (formData) => {
 
     await newUser.save();
     console.log("New User saved to DB");
+    return { success: true };
+  } catch (error) {
+    console.log(error, "Something went wrong in creating a New User");
+    return { error: "Something went wrong in creating a New User" };
+  }
+};
+
+// === Login with Credentials
+export const login = async (formData) => {
+  const { username, password } = Object.fromEntries(formData);
+
+  try {
+    await signIn("credentials", { username, password });
   } catch (error) {
     console.log(error, "Something went wrong in creating a New User");
     return { error: "Something went wrong in creating a New User" };
